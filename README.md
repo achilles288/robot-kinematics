@@ -3,6 +3,7 @@
 The main goal of this repository is mathematical calculations of forward and inverse kinematics. This is intended to be used for moving the end effector to a desired coordinate in 2D or 3D space. 
 
 <p align="center"><img src="./doc/robot-arm-kinematic1.png" alt="Robot arm kinematic geometry"></img></p>
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
