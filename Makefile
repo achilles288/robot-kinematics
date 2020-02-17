@@ -1,60 +1,53 @@
 ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+SHARED = 1
 
 
 CC = gcc
 CFLAGS = -O3 -Wall -fPIC -c
 
-INCLUDES = 
+AR = ar
+RANLIB = ranlib
 
-LIBS = \
-    -lm
 
 SRCS = \
-	src/rk_create_link.c \
-	src/rk_forward_kinematics.c \
-	src/rk_inverse_kinematics.c
+	src/math/vec2_cross.c \
+	src/math/vec2_dot.c \
+	src/math/vec2_normalize.c \
+	src/math/vec3_cross.c \
+	src/math/vec3_dot.c \
+	src/math/vec3_normalize.c
 
 OBJS = $(patsubst src/%.c, build/%.o, $(SRCS))
 
 
-INCLUDES2 = \
-	-Iinclude
-
-LIBS2 = \
-	-lglut \
-	-lm \
-	-Llib \
-	-lrobotkinematics \
-	-Wl,-rpath=$(ROOT_DIR)/lib
-
-
-all: robotkinematics rktest
+all: robotkinematics
 
 
 robotkinematics: mkdir $(OBJS)
-	@ $(CC) -shared -Wl,-soname,lib$@.so.1 -o lib/lib$@.so.1.0 $(OBJS)
-	@ ln -sf $(ROOT_DIR)/lib/lib$@.so.1.0 $(ROOT_DIR)/lib/lib$@.so.1
-	@ ln -sf $(ROOT_DIR)/lib/lib$@.so.1.0 $(ROOT_DIR)/lib/lib$@.so
-	@ echo [34mArchived library[0m
+ifeq ($(SHARED), 1)
+	@ $(CC) -shared -Wl,-soname,lib$@.so.1 -o lib/shared/lib$@.so.1.0 $(OBJS)
+	@ ln -sf $(ROOT_DIR)/lib/shared/lib$@.so.1.0 $(ROOT_DIR)/lib/shared/lib$@.so.1
+	@ ln -sf $(ROOT_DIR)/lib/shared/lib$@.so.1.0 $(ROOT_DIR)/lib/shared/lib$@.so
+	@ echo Compiled robot kinematics
+else
+	@ $(AR) -rc lib/lib$@.a $(OBJS)
+	@ $(RANLIB) lib/lib$@.a
+	@ echo Archived robot kinematics
+endif
 
-rktest: robotkinematics
-	@ $(CC) -Wall $(INCLUDES2) -o test/aero.o test/src/aero.c $(LIBS2)
-	@ echo [34mCompiled test program[0m
 
-mkdir:
-	@ mkdir -p build
-	@ mkdir -p lib
-
-$(OBJS): build/%.o: src/%.cpp
+$(OBJS): build/%.o: src/%.c
 	@ $(CC) $(CFLAGS) $(INCLUDES) -o $@ $< $(LIBS)
 
 
-run:
-	@ $(ROOT_DIR)/test/simulation.o
+mkdir:
+	@ mkdir -p build
+	@ mkdir -p build/math
+	@ mkdir -p lib
+	@ mkdir -p lib/shared
 
 
 clean:
 	-@ rm -r $(ROOT_DIR)/build
 	-@ rm -r $(ROOT_DIR)/lib
-	-@ rm $(ROOT_DIR)/test/*.o
 
