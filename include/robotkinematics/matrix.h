@@ -1,32 +1,56 @@
 #ifndef __RK_MATH_MATRIX_H__
 #define __RK_MATH_MATRIX_H__
 
+#include "vector.h"
+
 #if defined __cplusplus
 extern "C" {
 #endif
 
 
-typedef struct _rkMat2x3 rkMat2x3;
-typedef struct _rkMat3x4 rkMat3x4;
-
-
-struct _rkMat2x3 {
-    float data[6];
-};
-
-struct _rkMat3x4 {
-    float data[12];
-};
+typedef struct _rkMat3 rkMat3;
+typedef struct _rkMat4 rkMat4;
 
 
 /*
- * 2x3 actually is a 3x3 matrix of which the last row is 0, 0, 1.
- * Stored and computed as 2x3 for memory and performance.
- * 
- * Similar manner for 3x4 as 4x4 matrix.
+ * In these data structures, one bottom row is removed.
+ * The third block is always 0s and the fourth part a 1.
+ * The row is not used in computation for better performance.
  */
-rkMat2x3 rkMat2x3Multiply(rkMat2x3 A, rkMat2x3 B);
-rkMat3x4 rkMat3x4Multiply(rkMat3x4 A, rkMat3x4 B);
+struct _rkMat3 {
+    float data[2][3];
+};
+
+struct _rkMat4 {
+    float data[3][4];
+};
+
+
+
+rkMat3 rkMat3Multiply(rkMat3 A, rkMat3 B);
+rkMat3 rkMat3Transform(rkVec2 pos, float t);
+
+#define rkMat3GetRotation(M) \
+    acos((M).data[0][0])
+
+#define rkMat3GetTranslation(M) \
+    ((rkVec2) {(M).data[0][2], (M).data[1][2]})
+
+
+
+rkMat4 rkMat4Multiply(rkMat4 A, rkMat4 B);
+
+/*
+ * The rotation part is defined in terms of euler angles.
+ * The rotation order is ZYX.
+ * Z = yaw  Y = pitch  X = roll
+ */
+rkMat4 rkMat4Transform(rkVec3 pos, rkEuler rot);
+
+rkEuler rkMat4GetRotation(rkMat4 M);
+
+#define rkMat4GetTranslation(M) \
+    ((rkVec3) {(M).data[0][3], (M).data[1][3], (M).data[2][3])
 
 
 #if defined __cplusplus

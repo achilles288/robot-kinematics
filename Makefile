@@ -10,6 +10,11 @@ RANLIB = ranlib
 
 
 SRCS = \
+	src/math/mat3_multiply.c \
+	src/math/mat3_transform.c \
+	src/math/mat4_get_rotation.c \
+	src/math/mat4_multiply.c \
+	src/math/mat4_transform.c \
 	src/math/vec2_cross.c \
 	src/math/vec2_dot.c \
 	src/math/vec2_normalize.c \
