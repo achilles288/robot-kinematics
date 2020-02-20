@@ -20,13 +20,13 @@ typedef struct _rkArmLink3D rkArmLink3D;
 struct _rkArm2D {
     rkArmLink2D *links;
     int count;
-    rkMat3 transform;
+    rkMat3 transform2D;
 };
  
 struct _rkArmLink2D {
     float r;
     float theta;
-    rkMat3 transform;
+    rkMat3 transform2D;
 };
 
 rkArm2D rkCreateArm2D(int count);
@@ -44,7 +44,7 @@ float *rkInverseKinematics2D(rkArm2D *base, float x, float y, float t);
 struct _rkArm3D {
     rkArmLink3D *links;
     int count;
-    rkMat4 transform;
+    rkMat4 transform3D;
 };
 
 struct _rkArmLink3D {
@@ -52,7 +52,7 @@ struct _rkArmLink3D {
     float a;
     float theta;
     float alpha;
-    rkMat4 transform;
+    rkMat4 transform3D;
 };
 
 rkArm3D rkCreateArm3D(int count);
