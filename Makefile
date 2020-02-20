@@ -10,6 +10,10 @@ RANLIB = ranlib
 
 
 SRCS = \
+	src/arm2d_create.c \
+	src/arm2d_destroy.c \
+	src/armlink2d_create.c \
+	src/fkine2d.c \
 	src/math/mat3_multiply.c \
 	src/math/mat3_transform.c \
 	src/math/mat4_get_rotation.c \
@@ -20,8 +24,7 @@ SRCS = \
 	src/math/vec2_normalize.c \
 	src/math/vec3_cross.c \
 	src/math/vec3_dot.c \
-	src/math/vec3_normalize.c \
-	src/rk_rkForwardKinematics2D.c \
+	src/math/vec3_normalize.c
 	
 OBJS = $(patsubst src/%.c, build/%.o, $(SRCS))
 
