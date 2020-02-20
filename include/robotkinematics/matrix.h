@@ -50,7 +50,7 @@ rkMat4 rkMat4Transform(rkVec3 pos, rkEuler rot);
 rkEuler rkMat4GetRotation(rkMat4 M);
 
 #define rkMat4GetTranslation(M) \
-    ((rkVec3) {(M).data[0][3], (M).data[1][3], (M).data[2][3])
+    ((rkVec3) {(M).data[0][3], (M).data[1][3], (M).data[2][3]})
 
 
 #if defined __cplusplus
