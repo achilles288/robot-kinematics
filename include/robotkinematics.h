@@ -7,45 +7,61 @@
 extern "C" {
 #endif
 
-
+typedef struct _rkArm2D     rkArm2D;
 typedef struct _rkArmLink2D rkArmLink2D;
+typedef struct _rkArm2D     rkArm3D;
 typedef struct _rkArmLink3D rkArmLink3D;
 
 
 /*
  * Linked list data structure.
  */
+ 
+struct _rkArm2D {
+    rkArmLink2D *links;
+    int count;
+    rkMat3 transform;
+};
+ 
 struct _rkArmLink2D {
     float r;
     float theta;
-    rkArmLink2D *nextLink;
+    rkMat3 transform;
 };
 
-rkArmLink2D *rkCreateArmLink2D(ArmLink2D *root, float r, float theta);
-void *rkDestroyArmLink2D(ArmLink2D *root);
+rkArm2D rkCreateArm2D(int count);
+rkArmLink2D *rkCreateArmLink2D(rkArm2D *base, float r, float theta);
+void *rkDestroyArmLink2D(rkArm2D *base);
 
-rkPose2 *rkForwardKinematics2D(rkArmLink *root, ...);
-float *rkInverseKinematics2D(rkArmLink *root, float x, float y, float t);
+rkMat3 rkForwardKinematics2D(rkArm2D *base, ...);
+float *rkInverseKinematics2D(rkArm2D *base, float x, float y, float t);
 
 
 /*
  * DH parameters.
  * Linked list data structure.
  */
+struct _rkArm3D {
+    rkArmLink3D *links;
+    int count;
+    rkMat4 transform;
+};
+
 struct _rkArmLink3D {
     float d;
     float a;
     float theta;
     float alpha;
-    rkArmLink3D *nextLink;
+    rkMat4 transform;
 };
 
-rkArmLink3D *rkCreateArmLink3D(ArmLink3D *root, float d, float a,
+rkArm3D rkCreateArm3D(int count);
+rkArmLink3D *rkCreateArmLink3D(rkArm3D *base, float d, float a,
                                float theta, float alpha);
-void *rkDestroyArmLink3D(ArmLink3D *root);
+void *rkDestroyArmLink3D(rkArm3D *base);
 
-rkPose3 *rkForwardKinematics3D(rkArmLink *root, ...);
-float *rkInverseKinematics3D(rkArmLink *root, rkPose3 pose);
+rkMat4 rkForwardKinematics3D(rkArm3D *base, ...);
+float *rkInverseKinematics3D(rkArm3D *base, rkMat4 pose);
 
 
 #if defined __cplusplus

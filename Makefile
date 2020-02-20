@@ -20,8 +20,9 @@ SRCS = \
 	src/math/vec2_normalize.c \
 	src/math/vec3_cross.c \
 	src/math/vec3_dot.c \
-	src/math/vec3_normalize.c
-
+	src/math/vec3_normalize.c \
+	src/rk_rkForwardKinematics2D.c \
+	
 OBJS = $(patsubst src/%.c, build/%.o, $(SRCS))
 
 
