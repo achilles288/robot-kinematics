@@ -1,6 +1,7 @@
 #include "robotkinematics.h"
 
 #include <stdarg.h>
+#include <stdio.h>
 
 
 #if defined __cplusplus
@@ -12,28 +13,34 @@ rkMat3 rkForwardKinematics2D(rkArm2D *base, ...) {
     va_list args;
     va_start(args, base);
     
-    rkMat3 Ti;
-    base->links[0].transform  = base->transform;
-    int i = 0;
+    rkMat3 T = base->transform;
     
-    while(1) {
+    for(int i=0; i < base->count; i++) {
         rkArmLink2D *link = &base->links[i];
         link->q = va_arg(args, double);
         float t = link->q + link->theta;
         float c = cos(t);
         float s = sin(t);
-        rkMat3 T = (rkMat3) {{
-            { c, -s, link->r },
-            { s,  c,    0    }
-        }};
-        Ti = rkMat3Multiply(T, base->links[i].transform);
-        if(i+1 > base->count)
-            break;
-        base->links[i+1].transform = Ti;
-        i++;
+        link->transform = rkMat3Multiply(
+            T,
+            (rkMat3) {{
+                { c, -s,  0 },
+                { s,  c,  0 }
+            }}
+        );
+        T = rkMat3Multiply(
+            link->transform,
+            (rkMat3) {{
+                { 1,  0, link->r },
+                { 0,  1,    0    }
+            }}
+        );
+        rkVec2 pos = rkMat3GetTranslation(T);
+        float rot = rkMat3GetRotation(T) * 180/M_PI;
+        printf("fkine pos: %.2f %.2f  rot: %.2f\n", pos.x, pos.y, rot);
     }
     va_end(args);
-    return Ti;
+    return T;
 }
 
 #if defined __cplusplus

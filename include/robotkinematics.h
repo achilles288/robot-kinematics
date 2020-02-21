@@ -31,7 +31,7 @@ struct _rkArmLink2D {
     float q;
 };
 
-rkArm2D rkCreateArm2D(int count);
+rkArm2D *rkCreateArm2D(int count);
 void rkDestroyArm2D(rkArm2D *arm);
 rkArmLink2D *rkCreateArmLink2D(rkArm2D *base, float r, float theta);
 
@@ -59,7 +59,7 @@ struct _rkArmLink3D {
     float q;
 };
 
-rkArm3D rkCreateArm3D(int count);
+rkArm3D *rkCreateArm3D(int count);
 void rkDestroyArm3D(rkArm3D *arm);
 rkArmLink3D *rkCreateArmLink3D(rkArm3D *base, float d, float a,
                                float theta, float alpha);
