@@ -35,9 +35,6 @@ rkMat3 rkForwardKinematics2D(rkArm2D *base, ...) {
                 { 0,  1,    0    }
             }}
         );
-        rkVec2 pos = rkMat3GetTranslation(T);
-        float rot = rkMat3GetRotation(T) * 180/M_PI;
-        printf("fkine pos: %.2f %.2f  rot: %.2f\n", pos.x, pos.y, rot);
     }
     va_end(args);
     return T;

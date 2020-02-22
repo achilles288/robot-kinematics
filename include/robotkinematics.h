@@ -9,7 +9,7 @@ extern "C" {
 
 typedef struct _rkArm2D     rkArm2D;
 typedef struct _rkArmLink2D rkArmLink2D;
-typedef struct _rkArm2D     rkArm3D;
+typedef struct _rkArm3D     rkArm3D;
 typedef struct _rkArmLink3D rkArmLink3D;
 
 
