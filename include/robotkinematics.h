@@ -3,69 +3,80 @@
 
 #include "robotkinematics/math.h"
 
+#include <stdbool.h>
+#include <stdlib.h>
+
+
 #if defined __cplusplus
 extern "C" {
 #endif
 
-typedef struct _rkArm2D     rkArm2D;
+
 typedef struct _rkArmLink2D rkArmLink2D;
-typedef struct _rkArm3D     rkArm3D;
 typedef struct _rkArmLink3D rkArmLink3D;
 
 
-/*
- * Linked list data structure.
- */
- 
-struct _rkArm2D {
-    rkArmLink2D *links;
-    int count;
-    int reservedCount;
-    rkMat3 transform;
-};
- 
 struct _rkArmLink2D {
+    // Link parameters
     float r;
     float theta;
+    
     rkMat3 transform;
     float q;
+    
+    bool startOfChain;
+    bool endOfChain;
 };
 
-rkArm2D *rkCreateArm2D(int count);
-void rkDestroyArm2D(rkArm2D *arm);
-rkArmLink2D *rkCreateArmLink2D(rkArm2D *base, float r, float theta);
 
-rkMat3 rkForwardKinematics2D(rkArm2D *base, ...);
-float *rkInverseKinematics2D(rkArm2D *base, rkVec2 pos, float t);
+rkArmLink2D *rkCreateArm2D(int count);
+#define rkDestroyArm2D(ROOT) \
+    free(ROOT)
+
+rkArmLink2D *rkJoinArmLink2D(rkArmLink2D *root, float r, float theta);
 
 
-/*
- * DH parameters.
- * Linked list data structure.
- */
-struct _rkArm3D {
-    rkArmLink3D *links;
-    int count;
-    int reservedCount;
-    rkMat4 transform;
-};
+rkMat3 _rkForwardKinematics2D(rkArmLink2D *root, ...);
+#define rkForwardKinematics2D(ROOT, ...) \
+    _rkForwardKinematics2D((ROOT), __VA_ARGS__, NAN)
+
+float *rkInverseKinematics2D(rkArmLink2D *root, rkArmLink2D *end,
+                             rkVec2 pos, float t);
+
 
 struct _rkArmLink3D {
+    // DH parameters
     float d;
     float a;
     float theta;
     float alpha;
+    
     rkMat4 transform;
     float q;
+    
+    bool startOfChain;
+    bool endOfChain;
 };
 
-rkArm3D *rkCreateArm3D(int count);
-void rkDestroyArm3D(rkArm3D *arm);
-rkArmLink3D *rkCreateArmLink3D(rkArm3D *base, float d, float a,
-                               float theta, float alpha);
 
-rkMat4 rkForwardKinematics3D(rkArm3D *base, ...);
-float *rkInverseKinematics3D(rkArm3D *base, rkVec3 pos, rkEuler rot);
+rkArmLink3D *rkCreateArm3D(int count);
+#define rkDestroyArm3D(ROOT) \
+    free(ROOT)
+
+rkArmLink3D *rkJoinArmLink3D(rkArmLink3D *root, float d, float a,
+                             float theta, float alpha);
+
+
+rkMat4 _rkForwardKinematics3D(rkArmLink3D *root, ...);
+#define rkForwardKinematics3D(ROOT, ...) \
+    _rkForwardKinematics3D((ROOT), __VA_ARGS__, NAN)
+
+float *rkInverseKinematics3D(rkArmLink3D *root, rkArmLink3D *end,
+                             rkVec3 pos, rkEuler rot);
+
+
+#define RK_2D_ORIENTATION_ANY NAN
+#define RK_3D_ORIENTATION_ANY ((rkEuler) {NAN, NAN, NAN})
 
 
 #if defined __cplusplus

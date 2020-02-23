@@ -1,7 +1,6 @@
 #include "robotkinematics.h"
 
 #include <stdarg.h>
-#include <stdio.h>
 
 
 #if defined __cplusplus
@@ -9,16 +8,22 @@ extern "C" {
 #endif
 
 
-rkMat3 rkForwardKinematics2D(rkArm2D *base, ...) {
+rkMat3 _rkForwardKinematics2D(rkArmLink2D *root, ...) {
     va_list args;
-    va_start(args, base);
+    va_start(args, root);
     
-    rkMat3 T = base->transform;
+    rkArmLink2D *link = root;
+    rkMat3 T = link->transform;
     
-    for(int i=0; i < base->count; i++) {
-        rkArmLink2D *link = &base->links[i];
-        link->q = va_arg(args, double);
-        float t = link->q + link->theta;
+    if(link->startOfChain)
+        link++;
+    
+    do {
+        float q = va_arg(args, double);
+        if(isnan(q))
+            break;
+        link->q = q;
+        float t = q + link->theta;
         float c = cos(t);
         float s = sin(t);
         link->transform = rkMat3Multiply(
@@ -35,7 +40,11 @@ rkMat3 rkForwardKinematics2D(rkArm2D *base, ...) {
                 { 0,  1,    0    }
             }}
         );
-    }
+    } while(!(link++)->endOfChain);
+    
+    if(!link->endOfChain)
+        (++link)->transform = T;
+    
     va_end(args);
     return T;
 }

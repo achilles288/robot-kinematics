@@ -1,7 +1,6 @@
 #include "robotkinematics.h"
 
 #include <stdarg.h>
-#include <stdio.h>
 
 
 #if defined __cplusplus
@@ -9,16 +8,22 @@ extern "C" {
 #endif
 
 
-rkMat4 rkForwardKinematics3D(rkArm3D *base, ...) {
+rkMat4 _rkForwardKinematics3D(rkArmLink3D *root, ...) {
     va_list args;
-    va_start(args, base);
+    va_start(args, root);
     
-    rkMat4 T = base->transform;
+    rkArmLink3D *link = root;
+    rkMat4 T = link->transform;
     
-    for(int i=0; i < base->count; i++) {
-        rkArmLink3D *link = &base->links[i];
-        link->q = va_arg(args, double);
-        float t = link->q + link->theta;
+    if(link->startOfChain)
+        link++;
+    
+    do {
+        float q = va_arg(args, double);
+        if(isnan(q))
+            break;
+        link->q = q;
+        float t = q + link->theta;
         float cT = cos(t);
         float sT = sin(t);
         link->transform = rkMat4Multiply(
@@ -35,12 +40,16 @@ rkMat4 rkForwardKinematics3D(rkArm3D *base, ...) {
         T = rkMat4Multiply(
             link->transform,
             (rkMat4) {{
-                { cA, -sA,  0, link->d },
-                { sA,  sA,  0,    0    },
-                {  0,   0,  1, link->a }
+                { 1,   0,   0, link->a },
+                { 0,  cA, -sA,    0    },
+                { 0,  sA,  cA, link->d }
             }}
         );
-    }
+    } while(!(link++)->endOfChain);
+    
+    if(!link->endOfChain)
+        (++link)->transform = T;
+    
     va_end(args);
     return T;
 }

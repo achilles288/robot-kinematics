@@ -11,8 +11,9 @@ RANLIB = ranlib
 
 SRCS = \
 	src/arm2d_create.c \
-	src/arm2d_destroy.c \
-	src/armlink2d_create.c \
+	src/armlink2d_join.c \
+	src/arm3d_create.c \
+	src/armlink3d_join.c \
 	src/fkine2d.c \
 	src/fkine3d.c \
 	src/math/mat3_multiply.c \
