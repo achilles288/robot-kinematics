@@ -9,7 +9,16 @@ AR = ar
 RANLIB = ranlib
 
 
+INCLUDES = \
+	-Iinclude
+
 SRCS = \
+	src/chain2d_create.c \
+	src/chain3d_create.c \
+	src/fkine2d.c \
+	src/fkine3d.c \
+	src/link2d_join.c \
+	src/link3d_join.c \
 	src/math/mat3_multiply.c \
 	src/math/mat3_transform.c \
 	src/math/mat4_get_rotation.c \
@@ -20,8 +29,7 @@ SRCS = \
 	src/math/vec2_normalize.c \
 	src/math/vec3_cross.c \
 	src/math/vec3_dot.c \
-	src/math/vec3_normalize.c \
-	src/rk_rkForwardKinematics2D.c \
+	src/math/vec3_normalize.c
 	
 OBJS = $(patsubst src/%.c, build/%.o, $(SRCS))
 

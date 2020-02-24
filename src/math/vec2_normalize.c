@@ -1,4 +1,4 @@
-#include "../robotkinematics/vector.h"
+#include <rk/vector.h>
 
 #include <math.h>
 
