@@ -1,4 +1,4 @@
-#include "robotkinematics.h"
+#include <rk/kinematics.h>
 
 
 #if defined __cplusplus
@@ -6,10 +6,10 @@ extern "C" {
 #endif
 
 
-rkArmLink3D *rkJoinArmLink3D(rkArmLink3D *root, float d, float a,
+rkLink3D *rkJoinLink3D(rkLink3D *root, float d, float a,
                                float theta, float alpha)
 {
-    rkArmLink3D *link = root;
+    rkLink3D *link = root;
     while(!link->endOfChain) { ++link; }
     
     link->endOfChain = false;

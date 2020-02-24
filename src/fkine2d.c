@@ -1,4 +1,4 @@
-#include "robotkinematics.h"
+#include <rk/kinematics.h>
 
 #include <stdarg.h>
 
@@ -8,11 +8,11 @@ extern "C" {
 #endif
 
 
-rkMat3 _rkForwardKinematics2D(rkArmLink2D *root, ...) {
+rkMat3 _rkForwardKinematics2D(rkLink2D *root, ...) {
     va_list args;
     va_start(args, root);
     
-    rkArmLink2D *link = root;
+    rkLink2D *link = root;
     rkMat3 T = link->transform;
     
     if(link->startOfChain)
@@ -23,9 +23,8 @@ rkMat3 _rkForwardKinematics2D(rkArmLink2D *root, ...) {
         if(isnan(q))
             break;
         link->q = q;
-        float t = q + link->theta;
-        float c = cos(t);
-        float s = sin(t);
+        float c = cos(q);
+        float s = sin(q);
         link->transform = rkMat3Multiply(
             T,
             (rkMat3) {{

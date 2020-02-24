@@ -1,4 +1,4 @@
-#include "robotkinematics.h"
+#include <rk/kinematics.h>
 
 #include <stdarg.h>
 
@@ -8,11 +8,11 @@ extern "C" {
 #endif
 
 
-rkMat4 _rkForwardKinematics3D(rkArmLink3D *root, ...) {
+rkMat4 _rkForwardKinematics3D(rkLink3D *root, ...) {
     va_list args;
     va_start(args, root);
     
-    rkArmLink3D *link = root;
+    rkLink3D *link = root;
     rkMat4 T = link->transform;
     
     if(link->startOfChain)
@@ -23,26 +23,27 @@ rkMat4 _rkForwardKinematics3D(rkArmLink3D *root, ...) {
         if(isnan(q))
             break;
         link->q = q;
-        float t = q + link->theta;
-        float cT = cos(t);
-        float sT = sin(t);
+        float c = cos(q);
+        float s = sin(q);
         link->transform = rkMat4Multiply(
             T,
             (rkMat4) {{
-                { cT, -sT,  0,  0 },
-                { sT,  cT,  0,  0 },
-                {  0,   0,  1,  0 }
+                { c, -s,  0,  0 },
+                { s,  c,  0,  0 },
+                { 0,  0,  1,  0 }
             }}
         );
         
+        float cT = cos(link->theta);
+        float sT = sin(link->theta);
         float cA = cos(link->alpha);
         float sA = sin(link->alpha);
         T = rkMat4Multiply(
             link->transform,
             (rkMat4) {{
-                { 1,   0,   0, link->a },
-                { 0,  cA, -sA,    0    },
-                { 0,  sA,  cA, link->d }
+                { cT, -sT*cA,  sT*sA, link->a*cA },
+                { sT,  cT*cA, -cT*sA, link->a*sT },
+                {  0,    sA ,    cA , link->d }
             }}
         );
     } while(!(link++)->endOfChain);

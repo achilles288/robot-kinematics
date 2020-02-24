@@ -1,4 +1,4 @@
-#include "../robotkinematics/matrix.h"
+#include <rk/math.h>
 
 
 #if defined __cplusplus
