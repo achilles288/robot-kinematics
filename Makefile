@@ -19,6 +19,7 @@ SRCS = \
 	src/fkine3d.c \
 	src/link2d_join.c \
 	src/link3d_join.c \
+        src/ikine2d.c \
 	src/math/mat3_multiply.c \
 	src/math/mat3_transform.c \
 	src/math/mat4_get_rotation.c \
