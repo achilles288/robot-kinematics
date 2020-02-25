@@ -31,7 +31,7 @@ rkMat3 rkMat3Multiply(rkMat3 A, rkMat3 B);
 rkMat3 rkMat3Transform(rkVec2 pos, float t);
 
 #define rkMat3GetRotation(M) \
-    atan2((M).data[1][0], (M).data[0][0])
+    (atan2((M).data[1][0], (M).data[0][0]))
 
 #define rkMat3GetTranslation(M) \
     ((rkVec2) {(M).data[0][2], (M).data[1][2]})
@@ -52,6 +52,12 @@ rkEuler rkMat4GetRotation(rkMat4 M);
 #define rkMat4GetTranslation(M) \
     ((rkVec3) {(M).data[0][3], (M).data[1][3], (M).data[2][3]})
 
+
+/*
+ * Display the data of matrix.
+ */
+void rkMat3Print(rkMat3 M);
+void rkMat4Print(rkMat4 M);
 
 #if defined __cplusplus
 }
