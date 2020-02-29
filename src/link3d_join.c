@@ -6,8 +6,8 @@ extern "C" {
 #endif
 
 
-rkLink3D *rkJoinLink3D(rkLink3D *root, float d, float a,
-                               float theta, float alpha)
+rkLink3D *rkJoinLink3D(rkLink3D *root, float d, float theta,
+                       float a, float alpha)
 {
     rkLink3D *link = root;
     while(!link->endOfChain) { ++link; }
@@ -15,8 +15,8 @@ rkLink3D *rkJoinLink3D(rkLink3D *root, float d, float a,
     link->endOfChain = false;
     link++;
     link->d = d;
-    link->a = a;
     link->theta = theta;
+    link->a = a;
     link->alpha = alpha;
     return link;
 }

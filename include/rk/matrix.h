@@ -31,7 +31,7 @@ rkMat3 rkMat3Multiply(rkMat3 A, rkMat3 B);
 rkMat3 rkMat3Transform(rkVec2 pos, float t);
 
 #define rkMat3GetRotation(M) \
-    atan2((M).data[1][0], (M).data[0][0])
+    (atan2((M).data[1][0], (M).data[0][0]))
 
 #define rkMat3GetTranslation(M) \
     ((rkVec2) {(M).data[0][2], (M).data[1][2]})

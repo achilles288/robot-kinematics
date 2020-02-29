@@ -71,7 +71,7 @@ rkMat3 _rkForwardKinematics2D(rkLink2D *root, ...);
  * Answer joint values are to be extracted from structures.
  */
 void rkInverseKinematics2D(rkLink2D *root, rkLink2D *end,
-                             rkVec2 pos, float t);
+                           rkVec2 pos, float t);
 
 
 
@@ -83,8 +83,8 @@ void rkInverseKinematics2D(rkLink2D *root, rkLink2D *end,
  */
 struct _rkLink3D {
     float d;
-    float a;
     float theta;
+    float a;
     float alpha;
     
     rkMat4 transform;
@@ -108,8 +108,8 @@ rkLink3D *rkCreateChain3D(int count);
  * Append a link at the end of a kinematic chain.
  * Link length parameter.
  */
-rkLink3D *rkJoinLink3D(rkLink3D *root, float d, float a,
-                             float theta, float alpha);
+rkLink3D *rkJoinLink3D(rkLink3D *root, float d, float theta,
+                       float a, float alpha);
 
 
 /*
@@ -132,7 +132,7 @@ rkMat4 _rkForwardKinematics3D(rkLink3D *root, ...);
  * Answer joint values are to be extracted from structures.
  */
 void rkInverseKinematics3D(rkLink3D *root, rkLink3D *end,
-                             rkVec3 pos, rkEuler rot);
+                           rkVec3 pos, rkEuler rot);
 
 
 #define RK_2D_ORIENTATION_ANY NAN

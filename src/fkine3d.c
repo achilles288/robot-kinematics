@@ -41,7 +41,7 @@ rkMat4 _rkForwardKinematics3D(rkLink3D *root, ...) {
         T = rkMat4Multiply(
             link->transform,
             (rkMat4) {{
-                { cT, -sT*cA,  sT*sA, link->a*cA },
+                { cT, -sT*cA,  sT*sA, link->a*cT },
                 { sT,  cT*cA, -cT*sA, link->a*sT },
                 {  0,    sA ,    cA , link->d }
             }}

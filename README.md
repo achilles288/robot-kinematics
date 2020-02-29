@@ -8,61 +8,25 @@ The main goal of this repository is mathematical calculations of forward and inv
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
+### Implementation Example
 
-- Open GL (for kinematic simulation test)
-- GNU Make
-
-#### Ubuntu
-
-```bash
-sudo apt-get install freeglut3-dev libglm-dev
-```
+- A [6-DOF Robot Arm](https://github.com/staytu/robot-arm) researched at **STA Makerspace**.
 
 ### Install
 
-1. Compile static or shared library from source
+```makefile
+clone https://github.com/staytu/robot-kinematics
+cd robot-kinematics
+make SHARED=0
+```
 
-   #### PC
+## Documentation
 
-   ```makefile
-   clone https://github.com/staytu/robot-kinematics
-   cd robot-kinematics
-   make
-   ```
-
-   #### AVR
-
-   ```makefile
-   git submodule add https://github.com/staytu/robot-kinematics
-   cd robot-kinematics
-   make IS_AVR=1 TARGET=[Your MCU] PROGRAMMER=[Your Programmer]
-   ```
-
-2. Use the library in your project's makefile
-
-   ```makefile
-   INCLUDES = \
-   	-Irobot-kinematics/include \
-   	[Others]
-   
-   LIBS = \
-   	-Lrobot-kinematics/lib \
-   	-lrobotkinematics \
-   	[Others]
-   ```
+Please read the detailed documentation at [Wiki](https://github.com/staytu/robot-kinematics/wiki).
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/staytu/robot-kinematics/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Credits
-
-- Htoo Zaw Lwin
-- Khant Kyaw Khaung
-- Thiha Zaw
-
-See also the list of [contributors](https://github.com/staytu/robot-kinematics/graphs/contributors) who participated in this project.
+Please read [CONTRIBUTING.md](https://github.com/staytu/.github/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## License
 
