@@ -22,12 +22,12 @@ rkEuler rkMat4GetRotation(rkMat4 M) {
     else {
         // Gimbal lock position
         if(pitch > 0) { // pitch = pi/2
-            roll = atan2(M.data[0][1], M.data[0][2]);
-            yaw = 0;
+            yaw = atan2(M.data[0][1], M.data[0][2]);
+            roll = 0;
         }
         else { // pitch = -pi/2
-            roll = atan2(-M.data[0][1], -M.data[0][2]);
-            yaw = 0;
+            yaw = atan2(M.data[0][1], -M.data[0][2]);
+            roll = 0;
         }
     }
     return (rkEuler) {roll, pitch, yaw};
