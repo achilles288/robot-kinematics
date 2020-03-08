@@ -54,6 +54,10 @@ $(OBJS): build/%.o: src/%.c
 	@ $(CC) $(CFLAGS) $(INCLUDES) -o $@ $< $(LIBS)
 
 
+doc: mkdir
+	@ cd include; doxygen doxyfile
+
+
 mkdir:
 	@ mkdir -p build
 	@ mkdir -p build/math
@@ -62,6 +66,6 @@ mkdir:
 
 
 clean:
-	-@ rm -r $(ROOT_DIR)/build
-	-@ rm -r $(ROOT_DIR)/lib
+	-@ rm -r build
+	-@ rm -r lib
 

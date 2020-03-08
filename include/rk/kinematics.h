@@ -1,3 +1,37 @@
+/****************************************************************************
+ * Copyright (C) 2020 by STA YTU                                            *
+ *                                                                          *
+ * This file is part of Robot Kinematics.                                   *
+ *                                                                          *
+ *   Robot Kinematics is free software: you can redistribute it and/or      *
+ *   modify it under the terms of the GNU General Public License as         *
+ *   published by the Free Software Foundation, either version 3 of the     *
+ *   License, or (at your option) any later version.                        *
+ *                                                                          *
+ *   Robot Kinematics is distributed in the hope that it will be useful,    *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of         *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the           *
+ *   GNU General Public License for more details.                           *
+ *                                                                          *
+ *   You should have received a copy of the GNU General Public License      *
+ *   along with Robot Kinematics. If not, see                               *
+ *   <http://www.gnu.org/licenses/>.                                        *
+ ****************************************************************************/
+
+
+/**
+ * @file kinematics.h
+ * @brief All the functions you need for kinematics of a robot arm
+ *
+ * They compute transformations of kinematic chain with rotary joints. 
+ * The main applications are for robot arms, quadruped robots and humanoid 
+ * robots. Using forward kinematics, the output of a mechanism obtained from 
+ * joint variables can be computed and visualized (both translation and 
+ * rotation). For inverse kinematics is used for obtaining joint variables for 
+ * a specific coordinate of an end-effector.
+ */
+
+
 #ifndef __RK_KINEMATICS_H__
 #define __RK_KINEMATICS_H__
 
@@ -16,123 +50,263 @@ typedef struct _rkLink2D rkLink2D;
 typedef struct _rkLink3D rkLink3D;
 
 
-/*
- * 2-Dimension kinematic link.
+
+
+/**
+ * @brief 2-Dimension kinematic link or chain for revolute joints
  *
- * Kinematic chain link for revolute joints.
+ * Kinematic link for 2D revolute joints. 
+ * Only one link parameter, the link length. Other members are link position 
+ * which is a transform matrix, joint variable and booleans that states the
+ * link is start, end or else.
  */
 struct _rkLink2D {
-    float r;
+    float r; /**< Link length */
     
     rkMat3 transform;
-    float q;
+    /**< The matrix representing rotation and translation */
+    
+    float q; /**< Joint variable */
     
     bool startOfChain;
     bool endOfChain;
 };
 
 
-/*
- * Reserve memory for a number of links.
- * Returns an array of links.
+/**
+ * @brief Reserve memory for a number of links.
+ *
+ * @param count number of links
+ * @return Array of links. Kinematic chain.
  */
 rkLink2D *rkCreateChain2D(int count);
 
+
+/**
+ * @brief Free memory for kinematic chain.
+ *
+ * @param ROOT the root link or start of kinematic chain.
+ */
 #define rkDestroyChain2D(ROOT) \
     free(ROOT)
 
-/*
- * Append a link at the end of a kinematic chain.
- * Link length parameter.
+
+/**
+ * @brief Append a link at the end of a kinematic chain.
+ *
+ * Constructs a 2D kinematic link of a specified link lengeth. 
+ *
+ * @param root the root link or start of kinematic chain.
+ * @param r link length
+ * @return Constructed link
  */
 rkLink2D *rkJoinLink2D(rkLink2D *root, float r);
 
 
-/*
- * Computes link positions from joint variables.
- * 
- * Starting link to rotate is to be specified.
- * Number of parameters is variable (as many input as u wish).
- * 
- * Returns end effector transform matrix.
- * Transform matricies of the rest of links can be accessed through
- * data structures.
+/**
+ * @brief Computes 2D link positions from joint variables.
+ *
+ * Returns end effector transform matrix. Transform matricies of the rest of
+ * links can be accessed through data structures. Iteratrative calculation of
+ * link positions till the end of chain or the end of variadic parameters.
+ * the ending of the variadic parameters is to be specified with a NAN.
+ *
+ * @param root the start link to begin calculation
+ * @param ... joint variables
+ * @return Transform matrix of end calculation
+ *
+ * @code
+ * #include <rk/kinematics.h>
+ * #include <stdio.h>
+ *
+ * int main() {
+ *     rkLink2D *chain = rkCreateChain2D(3); // A 3-DOF chain
+ *     rkJoinLink2D(chain, 6.2f);
+ *     rkJoinLink2D(chain, 5.0f);
+ *     rkJoinLink2D(chain, 3.5f);
+ *     float q0 = atof(puts()) * M_PI/180;
+ *     float q1 = atof(puts()) * M_PI/180;
+ *     float q2 = atof(puts()) * M_PI/180;
+ *
+ *     rkMat3 Tend = rkForwardKinematics2D(chain, q0, q1, q2);
+ *     rkVec2 Pend = rkMat3GetTranslation(Tend);
+ *     float tend = rkMat3GetRotation(Tend) * 180/M_PI;
+ *     for(int i=0; i<3; i++) {
+ *         rkMat3 T = chain[i+1].transform;
+ *         rkVec2 P = rkMat3GetTranslation(T);
+ *         float t = rkMat3GetTranslation(T);
+ *         printf("Link%d\nx: %.2f y: %.2f t: %.2f\n\n", i, P.x, P.y, t);
+ *     }
+ *     printf("End\nx: %.2f y: %.2f t: %.2f\n", Pend.x, Pend.y, tend);
+ * }
+ * @endcode
+ *
+ * @see rkForwardKinematics2D
+ * @see https://github.com/staytu/robot-kinematics/wiki/Forward-Kinematics
  */
 rkMat3 _rkForwardKinematics2D(rkLink2D *root, ...);
 
+
+/**
+ * @brief Computes 2D link positions from joint variables.
+ *
+ * Calls the _rkForwardKinematics2D() function with a NAN at the last parameter
+ * predefined.
+ *
+ * @param ROOT the start link to begin calculation
+ * @param ... joint variables
+ * @return Transform matrix of end calculation
+ */
 #define rkForwardKinematics2D(ROOT, ...) \
     _rkForwardKinematics2D((ROOT), __VA_ARGS__, NAN)
 
-/*
- * Computes joint variables from target pose.
- * 
- * Starting and ending link.
- * 
- * Answer joint values are to be extracted from structures.
+
+/**
+ * @brief Computes joint variables from 2D target pose.
+ *
+ * Uses <b>FABRIK</b> algorithm. The answer joint variables are to be extracted
+ * from the data structures after function calling.
+ *
+ * @param root the start link to begin calculation
+ * @param end terminating link (set NULL to proceed to the end of chain)
+ * @param pos position of end link
+ * @param t orientation of end link (set RK_2D_ORIENTATION_ANY to neglet it)
  */
 void rkInverseKinematics2D(rkLink2D *root, rkLink2D *end,
                            rkVec2 pos, float t);
 
 
 
-/*
- * 3-Dimension kinematic link.
+
+/**
+ * @brief 3-Dimension kinematic link or chain for revolute joints
  *
- * Kinematic chain link for revolute joints.
- * DH parameters.
+ * Kinematic link for 3D revolute joints. 
+ * Defined by the DH parameters. Other members are link position which is a 
+ * transform matrix, joint variable and booleans that states the link is 
+ * start, end or else.
  */
 struct _rkLink3D {
-    float d;
-    float theta;
-    float a;
-    float alpha;
+    float d;  /**< Translation along z-axis */
+    float theta;  /**< Rotation about z-axis */
+    float a;  /**< Translation along rotated x-axis */
+    float alpha;  /**< Totation about the new x-axis */
     
     rkMat4 transform;
-    float q;
+    /**< The matrix representing rotation and translation */
+    
+    float q; /**< Joint variable */
     
     bool startOfChain;
     bool endOfChain;
 };
 
 
-/*
- * Reserve memory for a number of links.
- * Returns an array of links.
+/**
+ * @brief Reserve memory for a number of links.
+ *
+ * @param count number of links
+ * @return Array of links. Kinematic chain.
  */
 rkLink3D *rkCreateChain3D(int count);
 
+
+/**
+ * @brief Free memory for kinematic chain.
+ *
+ * @param ROOT the root link or start of kinematic chain.
+ */
 #define rkDestroyChain3D(ROOT) \
     free(ROOT)
 
-/*
- * Append a link at the end of a kinematic chain.
- * Link length parameter.
+
+/**
+ * @brief Append a link at the end of a kinematic chain.
+ *
+ * Constructs a 3D kinematic link from DH parameters. 
+ *
+ * @param root the root link or start of kinematic chain.
+ * @param d translation along z-axis
+ * @param theta rotation about z-axis
+ * @param a translation along rotated x-axis
+ * @param alpha rotation about the new x-axis
+ * @return Constructed link
+ *
+ * @see https://github.com/staytu/robot-kinematics/wiki/Forward-Kinematics
  */
 rkLink3D *rkJoinLink3D(rkLink3D *root, float d, float theta,
                        float a, float alpha);
 
 
-/*
- * Computes joint variables from target pose.
- * 
- * Starting and ending link.
- * 
- * Answer joint values are to be extracted from structures.
+/**
+ * @brief Computes 3D link positions from joint variables.
+ *
+ * Returns end effector transform matrix. Transform matricies of the rest of
+ * links can be accessed through data structures. Iteratrative calculation of
+ * link positions till the end of chain or the end of variadic parameters.
+ * the ending of the variadic parameters is to be specified with a NAN.
+ *
+ * @param root the start link to begin calculation
+ * @param ... joint variables
+ * @return Transform matrix of end calculation
+ *
+ * @code
+ * #include <rk/kinematics.h>
+ * #include <stdio.h>
+ *
+ * int main() {
+ *     rkLink3D *chain = rkCreateChain3D(3); // A 3-DOF chain
+ *     rkJoinLink3D(chain, 2.0f, 0, 0, M_PI/2);
+ *     rkJoinLink3D(chain, 0, 0, 6.0f, 0);
+ *     rkJoinLink3D(chain, 0, 0, 4.5f, 0);
+ *     float q0 = atof(puts()) * M_PI/180;
+ *     float q1 = atof(puts()) * M_PI/180;
+ *     float q2 = atof(puts()) * M_PI/180;
+ *
+ *     rkMat4 Tend = rkForwardKinematics3D(chain, q0, q1, q2);
+ *     rkVec3 Pend = rkMat4GetTranslation(Tend);
+ *     rkEuler Rend = rkMat4GetRotation(Tend);
+ *     printf("End\npos: %.2f %.2f %.2f\nrot: %.2f %.2f %.2f\n",
+ *            Pend.x, Pend.y, Pend.z, Rend.x, Rend.y, Rend.z);
+ * }
+ * @endcode
+ *
+ * @see rkForwardKinematics3D
+ * @see _rkForwardKinematics2D
+ * @see https://github.com/staytu/robot-kinematics/wiki/Forward-Kinematics
  */
 rkMat4 _rkForwardKinematics3D(rkLink3D *root, ...);
 
+
+/**
+ * @brief Computes 3D link positions from joint variables.
+ *
+ * Calls the _rkForwardKinematics3D() function with a NAN at the last parameter
+ * predefined.
+ *
+ * @param ROOT the start link to begin calculation
+ * @param ... joint variables
+ * @return Transform matrix of end calculation
+ */
 #define rkForwardKinematics3D(ROOT, ...) \
     _rkForwardKinematics3D((ROOT), __VA_ARGS__, NAN)
 
-/*
- * Computes joint variables from target pose.
- * 
- * Starting and ending link.
- * 
- * Answer joint values are to be extracted from structures.
+
+/**
+ * @brief Computes joint variables from 3D target pose.
+ *
+ * Uses <b>FABRIK</b> algorithm. The answer joint variables are to be extracted
+ * from the data structures after function calling.
+ *
+ * @param root the start link to begin calculation
+ * @param end terminating link (set NULL to proceed to the end of chain)
+ * @param pos position of end link
+ * @param rot orientation of end link (set RK_3D_ORIENTATION_ANY to neglet it)
  */
 void rkInverseKinematics3D(rkLink3D *root, rkLink3D *end,
                            rkVec3 pos, rkEuler rot);
+
+
 
 
 #define RK_2D_ORIENTATION_ANY NAN
