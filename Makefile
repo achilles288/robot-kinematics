@@ -24,8 +24,6 @@ SRCS = \
 	src/math/mat4_get_rotation.c \
 	src/math/mat4_multiply.c \
 	src/math/mat4_transform.c \
-	src/math/vec2_cross.c \
-	src/math/vec2_dot.c \
 	src/math/vec2_normalize.c \
 	src/math/vec3_cross.c \
 	src/math/vec3_dot.c \
