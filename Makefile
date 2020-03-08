@@ -52,8 +52,11 @@ $(OBJS): build/%.o: src/%.c
 	@ $(CC) $(CFLAGS) $(INCLUDES) -o $@ $< $(LIBS)
 
 
-doc: mkdir
+docs: mkdir
 	@ cd include; doxygen doxyfile
+	-@ rm -r docs/api/*
+	@ mv -f docs/html/* docs/api
+	@ rm -r docs/html
 
 
 mkdir:
