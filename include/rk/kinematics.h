@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (C) 2020 by STA YTU                                            *
+ * Copyright (C) 2020 by Khant Kyaw Khaung                                  *
  *                                                                          *
  * This file is part of Robot Kinematics.                                   *
  *                                                                          *
@@ -142,7 +142,7 @@ rkLink2D *rkJoinLink2D(rkLink2D *root, float r);
  * @endcode
  *
  * @see rkForwardKinematics2D
- * @see https://github.com/staytu/robot-kinematics/wiki/Forward-Kinematics
+ * @see https://github.com/khantkyawkhaung/robot-kinematics/wiki/Forward-Kinematics
  */
 rkMat3 _rkForwardKinematics2D(rkLink2D *root, ...);
 
@@ -232,7 +232,7 @@ rkLink3D *rkCreateChain3D(int count);
  * @param alpha rotation about the new x-axis
  * @return Constructed link
  *
- * @see https://github.com/staytu/robot-kinematics/wiki/Forward-Kinematics
+ * @see https://github.com/khantkyawkhaung/robot-kinematics/wiki/Forward-Kinematics
  */
 rkLink3D *rkJoinLink3D(rkLink3D *root, float d, float theta,
                        float a, float alpha);
@@ -273,7 +273,7 @@ rkLink3D *rkJoinLink3D(rkLink3D *root, float d, float theta,
  *
  * @see rkForwardKinematics3D
  * @see _rkForwardKinematics2D
- * @see https://github.com/staytu/robot-kinematics/wiki/Forward-Kinematics
+ * @see https://github.com/khantkyawkhaung/robot-kinematics/wiki/Forward-Kinematics
  */
 rkMat4 _rkForwardKinematics3D(rkLink3D *root, ...);
 

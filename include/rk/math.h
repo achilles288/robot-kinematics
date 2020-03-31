@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (C) 2020 by STA YTU                                            *
+ * Copyright (C) 2020 by Khant Kyaw Khaung                                  *
  *                                                                          *
  * This file is part of Robot Kinematics.                                   *
  *                                                                          *

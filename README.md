@@ -8,26 +8,22 @@ The main goal of this repository is mathematical calculations of forward and inv
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Implementation Example
-
-- A [6-DOF Robot Arm](https://github.com/staytu/robot-arm) researched at **STA Makerspace**.
-
 ### Install
 
 ```makefile
-clone https://github.com/staytu/robot-kinematics
+clone https://github.com/khantkyawkhaung/robot-kinematics
 cd robot-kinematics
 make SHARED=0
 ```
 
 ## Documentation
 
-Please read the detailed documentation at [Wiki](https://github.com/staytu/robot-kinematics/wiki).
+Please read the detailed documentation at [Wiki](https://github.com/khantkyawkhaung/robot-kinematics/wiki).
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/staytu/.github/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+If you are willing to help us enhancing this open source project, you may summit bug reports and feature suggestions as GitHub issues. You can also take part of the project making pull requests as well. Your contributions to our project is warmly welcomed.
 
 ## License
 
-This project is licensed under the **GPL-v3** License - see the [LICENSE](https://github.com/staytu/robot-kinematics/blob/master/LICENSE) file for details.
+This project is licensed under the **GPL-v3** License - see the [LICENSE](https://github.com/khantkyawkhaung/robot-kinematics/blob/master/LICENSE) file for details.

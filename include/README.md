@@ -1,4 +1,4 @@
-In mechanical engineering, robotics and animations, kinematics is used to describe the motion of systems composed of joined parts such as an engine, a robotic arm or the human skeleton. **STA’s Robot Kinematics** is a light-weight **C** API specifically designed for robotics. They compute transformations of kinematic chain with rotary joints. The main applications are for robot arms, quadruped robots and humanoid robots.
+In mechanical engineering, robotics and animations, kinematics is used to describe the motion of systems composed of joined parts such as an engine, a robotic arm or the human skeleton. **Robot Kinematics** is a light-weight **C** API specifically designed for robotics. They compute transformations of kinematic chain with rotary joints. The main applications are for robot arms, quadruped robots and humanoid robots.
 
 ![Robot arm kinematics](../robot-arm-kinematic1.png)
 
