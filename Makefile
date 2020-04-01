@@ -1,9 +1,14 @@
 ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-SHARED = 1
+DEBUG = 1
 
 
 CC = gcc
-CFLAGS = -O3 -Wall -fPIC -c
+
+ifeq ($(DEBUG), 1)
+CFLAGS = -O0 -Wall -fPIC -c
+else
+CFLAGS = -O3 -Wall -fPIC -c -DNDEBUG
+endif
 
 AR = ar
 RANLIB = ranlib
@@ -11,6 +16,9 @@ RANLIB = ranlib
 
 INCLUDES = \
 	-Iinclude
+
+LIBS = \
+	-lm
 
 SRCS = \
 	src/chain2d_create.c \
@@ -36,16 +44,14 @@ all: robotkinematics
 
 
 robotkinematics: mkdir $(OBJS)
-ifeq ($(SHARED), 1)
-	@ $(CC) -shared -Wl,-soname,lib$@.so.1 -o lib/shared/lib$@.so.1.0 $(OBJS)
-	@ ln -sf $(ROOT_DIR)/lib/shared/lib$@.so.1.0 $(ROOT_DIR)/lib/shared/lib$@.so.1
-	@ ln -sf $(ROOT_DIR)/lib/shared/lib$@.so.1.0 $(ROOT_DIR)/lib/shared/lib$@.so
-	@ echo Compiled robot kinematics
-else
-	@ $(AR) -rc lib/lib$@.a $(OBJS)
-	@ $(RANLIB) lib/lib$@.a
-	@ echo Archived robot kinematics
+ifeq ($(DEBUG), 1)
+	@ $(CC) -shared -Wl,-soname,lib$@.so.1 -o lib/devel/lib$@.so.1.0 $(OBJS) $(LIBS)
+	@ ln -sf $(ROOT_DIR)/lib/devel/lib$@.so.1.0 $(ROOT_DIR)/lib/devel/lib$@.so.1
+	@ ln -sf $(ROOT_DIR)/lib/devel/lib$@.so.1.0 $(ROOT_DIR)/lib/devel/lib$@.so
+	@ $(AR) -rc lib/devel/static/lib$@.a $(OBJS)
+	@ $(RANLIB) lib/devel/static/lib$@.a
 endif
+	@ echo Compiled robot kinematics
 
 
 $(OBJS): build/%.o: src/%.c
@@ -63,7 +69,9 @@ mkdir:
 	@ mkdir -p build
 	@ mkdir -p build/math
 	@ mkdir -p lib
-	@ mkdir -p lib/shared
+	@ mkdir -p lib/devel
+	@ mkdir -p lib/devel/static
+	@ mkdir -p lib/static
 
 
 clean:

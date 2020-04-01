@@ -118,26 +118,43 @@ rkLink2D *rkJoinLink2D(rkLink2D *root, float r);
  * @code
  * #include <rk/kinematics.h>
  * #include <stdio.h>
- *
+ * #include <string.h>
+ * 
+ * 
  * int main() {
- *     rkLink2D *chain = rkCreateChain2D(3); // A 3-DOF chain
+ *     // A 3-DOF chain
+ *     rkLink2D *chain = rkCreateChain2D(3);
  *     rkJoinLink2D(chain, 6.2f);
  *     rkJoinLink2D(chain, 5.0f);
  *     rkJoinLink2D(chain, 3.5f);
- *     float q0 = atof(puts()) * M_PI/180;
- *     float q1 = atof(puts()) * M_PI/180;
- *     float q2 = atof(puts()) * M_PI/180;
- *
+ *     
+ *     // Enter joint variables
+ *     char buff[16];
+ *     printf("q0: ");
+ *     fgets(buff, 16, stdin);
+ *     float q0 = atof(buff) * M_PI/180;
+ *     memset(buff, 0, sizeof(buff));
+ *     printf("q1: ");
+ *     fgets(buff, 16, stdin);
+ *     float q1 = atof(buff) * M_PI/180;
+ *     memset(buff, 0, sizeof(buff));
+ *     printf("q2: ");
+ *     fgets(buff, 16, stdin);
+ *     float q2 = atof(buff) * M_PI/180;
+ *     
+ *     // Compute output
  *     rkMat3 Tend = rkForwardKinematics2D(chain, q0, q1, q2);
  *     rkVec2 Pend = rkMat3GetTranslation(Tend);
  *     float tend = rkMat3GetRotation(Tend) * 180/M_PI;
+ *     
+ *     // Print output
  *     for(int i=0; i<3; i++) {
  *         rkMat3 T = chain[i+1].transform;
  *         rkVec2 P = rkMat3GetTranslation(T);
- *         float t = rkMat3GetTranslation(T);
- *         printf("Link%d\nx: %.2f y: %.2f t: %.2f\n\n", i, P.x, P.y, t);
+ *         float t = rkMat3GetRotation(T) * 180/M_PI;;
+ *         printf("Link%d - x: %.2f y: %.2f t: %.2f\n", i, P.x, P.y, t);
  *     }
- *     printf("End\nx: %.2f y: %.2f t: %.2f\n", Pend.x, Pend.y, tend);
+ *     printf("End - x: %.2f y: %.2f t: %.2f\n", Pend.x, Pend.y, tend);
  * }
  * @endcode
  *
@@ -253,21 +270,51 @@ rkLink3D *rkJoinLink3D(rkLink3D *root, float d, float theta,
  * @code
  * #include <rk/kinematics.h>
  * #include <stdio.h>
- *
+ * #include <string.h>
+ * 
+ * 
  * int main() {
- *     rkLink3D *chain = rkCreateChain3D(3); // A 3-DOF chain
+ *     // A 3-DOF chain
+ *     rkLink3D *chain = rkCreateChain3D(3);
  *     rkJoinLink3D(chain, 2.0f, 0, 0, M_PI/2);
  *     rkJoinLink3D(chain, 0, 0, 6.0f, 0);
  *     rkJoinLink3D(chain, 0, 0, 4.5f, 0);
- *     float q0 = atof(puts()) * M_PI/180;
- *     float q1 = atof(puts()) * M_PI/180;
- *     float q2 = atof(puts()) * M_PI/180;
- *
+ *     
+ *     // Enter joint variables
+ *     char buff[16];
+ *     printf("q0: ");
+ *     fgets(buff, 16, stdin);
+ *     float q0 = atof(buff) * M_PI/180;
+ *     memset(buff, 0, sizeof(buff));
+ *     printf("q1: ");
+ *     fgets(buff, 16, stdin);
+ *     float q1 = atof(buff) * M_PI/180;
+ *     memset(buff, 0, sizeof(buff));
+ *     printf("q2: ");
+ *     fgets(buff, 16, stdin);
+ *     float q2 = atof(buff) * M_PI/180;
+ *     
+ *     // Compute output
  *     rkMat4 Tend = rkForwardKinematics3D(chain, q0, q1, q2);
  *     rkVec3 Pend = rkMat4GetTranslation(Tend);
  *     rkEuler Rend = rkMat4GetRotation(Tend);
- *     printf("End\npos: %.2f %.2f %.2f\nrot: %.2f %.2f %.2f\n",
- *            Pend.x, Pend.y, Pend.z, Rend.x, Rend.y, Rend.z);
+ *     Rend.x *= 180/M_PI;
+ *     Rend.y *= 180/M_PI;
+ *     Rend.z *= 180/M_PI;
+ *     
+ *     // Print output
+ *     for(int i=0; i<3; i++) {
+ *         rkMat4 T = chain[i+1].transform;
+ *         rkVec3 P = rkMat4GetTranslation(T);
+ *         rkEuler R = rkMat4GetRotation(T);
+ *         R.x *= 180/M_PI;
+ *         R.y *= 180/M_PI;
+ *         R.z *= 180/M_PI;
+ *         printf("Link%d - pos: %.2f %.2f %.2f  rot: %.2f %.2f %.2f\n",
+ *                 i, P.x, P.y, P.z, R.x, R.y, R.z);
+ *     }
+ *     printf("End - pos: %.2f %.2f %.2f  rot: %.2f %.2f %.2f\n",
+ *             Pend.x, Pend.y, Pend.z, Rend.x, Rend.y, Rend.z);
  * }
  * @endcode
  *
