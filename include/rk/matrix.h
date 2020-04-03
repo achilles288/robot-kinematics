@@ -158,6 +158,42 @@ rkEuler rkMat4GetRotation(rkMat4 M);
     ((rkVec3) {(M).data[0][3], (M).data[1][3], (M).data[2][3]})
 
 
+
+
+/**
+ * @brief Prints all the cells of the matrix on the console
+ * 
+ * @param M The matrix
+ *
+ * @par Output
+ * Function ouput on the console looks like
+ * @code
+ * ┌─                        ─┐
+ * │ 0.8068, -0.5908, 34.7200 │
+ * │ 0.5908,  0.8068, 44.3000 │
+ * └─                        ─┘
+ * @endcode
+ */
+void rkMat3Print(rkMat3 M);
+
+/**
+ * @brief Prints all the cells of the matrix on the console
+ * 
+ * @param M The matrix
+ * 
+ * @par Output
+ * Function ouput on the console looks like
+ * @code
+ * ┌─                                   ─┐
+ * │ -0.0000, -0.9014,  0.4330, 124.6600 │
+ * │ -0.0000,  0.4330,  0.9014, -54.3000 │
+ * │ -1.0000, -0.0000, -0.0000,   6.3450 │
+ * └─                                   ─┘
+ * @endcode
+ */
+void rkMat4Print(rkMat4 M);
+
+
 #if defined __cplusplus
 }
 #endif

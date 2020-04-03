@@ -28,9 +28,11 @@ SRCS = \
 	src/link2d_join.c \
 	src/link3d_join.c \
 	src/math/mat3_multiply.c \
+	src/math/mat3_print.c \
 	src/math/mat3_transform.c \
 	src/math/mat4_get_rotation.c \
 	src/math/mat4_multiply.c \
+	src/math/mat4_print.c \
 	src/math/mat4_transform.c \
 	src/math/vec2_normalize.c \
 	src/math/vec3_cross.c \
