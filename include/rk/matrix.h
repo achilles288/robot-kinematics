@@ -135,10 +135,15 @@ rkMat4 rkMat4Transform(rkVec3 pos, rkEuler rot);
 /**
  * @brief Calculate the euler angles from the members of the matrix
  *
+ * Calculation is done by applying functions to certain cells of the matrix.
+ * According to the formula derivation, there are 3 branches for the code.
+ * In case of Gimbal Lock, since cos(theta) is 0 and the default division
+ * by cos(theta) functions don't work, there use alternative approach.
+ *
  * @param M Transform matrix
  * @return Euler angles
  *
- * @see https://github.com/staytu/robot-kinematics/wiki/Euler-And-Matrix
+ * @see https://github.com/khantkyawkhaung/robot-kinematics/wiki/Euler-And-Matrix
  */
 rkEuler rkMat4GetRotation(rkMat4 M);
 
@@ -151,6 +156,48 @@ rkEuler rkMat4GetRotation(rkMat4 M);
  */
 #define rkMat4GetTranslation(M) \
     ((rkVec3) {(M).data[0][3], (M).data[1][3], (M).data[2][3]})
+
+
+
+
+/**
+ * @brief Prints all the cells of the matrix on the console
+ * 
+ * @param M The matrix
+ *
+ * @par Output
+ * Function ouput on the console looks like
+ * @code
+ * ┌─                        ─┐
+ * │ 0.8068, -0.5908, 34.7200 │
+ * │ 0.5908,  0.8068, 44.3000 │
+ * └─                        ─┘
+ * @endcode
+ */
+#define rkMat3Print(M) rkMatPrint(&(M), RK_MAT3)
+
+/**
+ * @brief Prints all the cells of the matrix on the console
+ * 
+ * @param M The matrix
+ * 
+ * @par Output
+ * Function ouput on the console looks like
+ * @code
+ * ┌─                                   ─┐
+ * │ -0.0000, -0.9014,  0.4330, 124.6600 │
+ * │ -0.0000,  0.4330,  0.9014, -54.3000 │
+ * │ -1.0000, -0.0000, -0.0000,   6.3450 │
+ * └─                                   ─┘
+ * @endcode
+ */
+#define rkMat4Print(M) rkMatPrint(&(M), RK_MAT4)
+
+
+#define RK_MAT3 0
+#define RK_MAT4 1
+
+void rkMatPrint(void *ptr, int type);
 
 
 #if defined __cplusplus

@@ -6,7 +6,9 @@ var searchData=
   ['rkforwardkinematics3d',['rkForwardKinematics3D',['../kinematics_8h.html#a8074f9c93d4b88242bb634d958cfea36',1,'kinematics.h']]],
   ['rkmat3getrotation',['rkMat3GetRotation',['../matrix_8h.html#a7741c1d070783d2ace3f1997545c837c',1,'matrix.h']]],
   ['rkmat3gettranslation',['rkMat3GetTranslation',['../matrix_8h.html#ae0e714e4108733faeb43d6f19c858bbb',1,'matrix.h']]],
+  ['rkmat3print',['rkMat3Print',['../matrix_8h.html#a7252555aa123d999b3e8f3a93cf80020',1,'matrix.h']]],
   ['rkmat4gettranslation',['rkMat4GetTranslation',['../matrix_8h.html#a505ba639628b07fe7d76c81512bd8b3d',1,'matrix.h']]],
+  ['rkmat4print',['rkMat4Print',['../matrix_8h.html#a8ce9a386ed0ee9e85b824c7390ddaaa8',1,'matrix.h']]],
   ['rkvec2cross',['rkVec2Cross',['../vector_8h.html#ac30485045dcecbd1299dc359641678d8',1,'vector.h']]],
   ['rkvec2dot',['rkVec2Dot',['../vector_8h.html#a8dc26491de28aded2c2bfe49bd8ac686',1,'vector.h']]]
 ];

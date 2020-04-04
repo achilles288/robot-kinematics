@@ -100,6 +100,18 @@ Macros</h2></td></tr>
 <tr class="memitem:a505ba639628b07fe7d76c81512bd8b3d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a505ba639628b07fe7d76c81512bd8b3d">rkMat4GetTranslation</a>(M)&#160;&#160;&#160;((<a class="el" href="struct__rkVec3.html">rkVec3</a>) {(M).data[0][3], (M).data[1][3], (M).data[2][3]})</td></tr>
 <tr class="memdesc:a505ba639628b07fe7d76c81512bd8b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the position vector from the matrix.  <a href="#a505ba639628b07fe7d76c81512bd8b3d">More...</a><br /></td></tr>
 <tr class="separator:a505ba639628b07fe7d76c81512bd8b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7252555aa123d999b3e8f3a93cf80020"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a7252555aa123d999b3e8f3a93cf80020">rkMat3Print</a>(M)&#160;&#160;&#160;rkMatPrint(&amp;(M), RK_MAT3)</td></tr>
+<tr class="memdesc:a7252555aa123d999b3e8f3a93cf80020"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints all the cells of the matrix on the console.  <a href="#a7252555aa123d999b3e8f3a93cf80020">More...</a><br /></td></tr>
+<tr class="separator:a7252555aa123d999b3e8f3a93cf80020"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ce9a386ed0ee9e85b824c7390ddaaa8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a8ce9a386ed0ee9e85b824c7390ddaaa8">rkMat4Print</a>(M)&#160;&#160;&#160;rkMatPrint(&amp;(M), RK_MAT4)</td></tr>
+<tr class="memdesc:a8ce9a386ed0ee9e85b824c7390ddaaa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints all the cells of the matrix on the console.  <a href="#a8ce9a386ed0ee9e85b824c7390ddaaa8">More...</a><br /></td></tr>
+<tr class="separator:a8ce9a386ed0ee9e85b824c7390ddaaa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0bbf9c2d95be51f408c670b2fb8d68d"><td class="memItemLeft" align="right" valign="top"><a id="af0bbf9c2d95be51f408c670b2fb8d68d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RK_MAT3</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:af0bbf9c2d95be51f408c670b2fb8d68d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54a97f11cd1adcc80934529fd82d4fbc"><td class="memItemLeft" align="right" valign="top"><a id="a54a97f11cd1adcc80934529fd82d4fbc"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RK_MAT4</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a54a97f11cd1adcc80934529fd82d4fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -127,6 +139,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a47a9cc73a6032b08f1b6f7113a4a7a80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct__rkVec3.html">rkEuler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a47a9cc73a6032b08f1b6f7113a4a7a80">rkMat4GetRotation</a> (<a class="el" href="struct__rkMat4.html">rkMat4</a> M)</td></tr>
 <tr class="memdesc:a47a9cc73a6032b08f1b6f7113a4a7a80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the euler angles from the members of the matrix.  <a href="#a47a9cc73a6032b08f1b6f7113a4a7a80">More...</a><br /></td></tr>
 <tr class="separator:a47a9cc73a6032b08f1b6f7113a4a7a80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25f6464261ee3432e2f8d212dbf39f18"><td class="memItemLeft" align="right" valign="top"><a id="a25f6464261ee3432e2f8d212dbf39f18"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>rkMatPrint</b> (void *ptr, int type)</td></tr>
+<tr class="separator:a25f6464261ee3432e2f8d212dbf39f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The header declaring 3x3 and 4x4 matrix structures and functions. </p>
@@ -186,6 +201,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a7252555aa123d999b3e8f3a93cf80020"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7252555aa123d999b3e8f3a93cf80020">&#9670;&nbsp;</a></span>rkMat3Print</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define rkMat3Print</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">M</td><td>)</td>
+          <td>&#160;&#160;&#160;rkMatPrint(&amp;(M), RK_MAT3)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prints all the cells of the matrix on the console. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td>The matrix</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Output</dt><dd>Function ouput on the console looks like <div class="fragment"><div class="line">┌─                        ─┐</div><div class="line">│ 0.8068, -0.5908, 34.7200 │</div><div class="line">│ 0.5908,  0.8068, 44.3000 │</div><div class="line">└─                        ─┘</div></div><!-- fragment --> </dd></dl>
+
+</div>
+</div>
 <a id="a505ba639628b07fe7d76c81512bd8b3d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a505ba639628b07fe7d76c81512bd8b3d">&#9670;&nbsp;</a></span>rkMat4GetTranslation</h2>
 
@@ -210,6 +252,33 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Position vector </dd></dl>
+
+</div>
+</div>
+<a id="a8ce9a386ed0ee9e85b824c7390ddaaa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ce9a386ed0ee9e85b824c7390ddaaa8">&#9670;&nbsp;</a></span>rkMat4Print</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define rkMat4Print</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">M</td><td>)</td>
+          <td>&#160;&#160;&#160;rkMatPrint(&amp;(M), RK_MAT4)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Prints all the cells of the matrix on the console. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">M</td><td>The matrix</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section user"><dt>Output</dt><dd>Function ouput on the console looks like <div class="fragment"><div class="line">┌─                                   ─┐</div><div class="line">│ -0.0000, -0.9014,  0.4330, 124.6600 │</div><div class="line">│ -0.0000,  0.4330,  0.9014, -54.3000 │</div><div class="line">│ -1.0000, -0.0000, -0.0000,   6.3450 │</div><div class="line">└─                                   ─┘</div></div><!-- fragment --> </dd></dl>
 
 </div>
 </div>
@@ -307,6 +376,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Calculate the euler angles from the members of the matrix. </p>
+<p>Calculation is done by applying functions to certain cells of the matrix. According to the formula derivation, there are 3 branches for the code. In case of Gimbal Lock, since cos(theta) is 0 and the default division by cos(theta) functions don't work, there use alternative approach.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">M</td><td>Transform matrix </td></tr>
@@ -314,7 +384,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Euler angles</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a href="https://github.com/staytu/robot-kinematics/wiki/Euler-And-Matrix">https://github.com/staytu/robot-kinematics/wiki/Euler-And-Matrix</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a href="https://github.com/khantkyawkhaung/robot-kinematics/wiki/Euler-And-Matrix">https://github.com/khantkyawkhaung/robot-kinematics/wiki/Euler-And-Matrix</a> </dd></dl>
 
 </div>
 </div>
