@@ -2,7 +2,6 @@
 
 #include <locale.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
 
@@ -12,18 +11,33 @@ extern "C" {
 #endif
 
 
-void rkMat3Print(rkMat3 M) {
+void rkMatPrint(void *ptr, int type) {
+    float *data = 0;
+    int row = 0, col = 0;
+    if(type == RK_MAT3) {
+        row = 2;
+        col = 3;
+        data = (float*) &(((rkMat3*)ptr)->data);
+    }
+    else if(type == RK_MAT4) {
+        row = 3;
+        col = 4;
+        data = (float*) &(((rkMat4*)ptr)->data);
+    }
     char *loc = setlocale(LC_ALL, 0);
-    freopen(0, "w", stdout);
+    freopen(0, "a", stdout);
     setlocale(LC_ALL, "");
     
-    int a[3];
-    int line_width = 10;
-    for(int i=0; i<3; i++) {
+    int a[4];
+    int line_width = 6 + 2*(col-1);
+    for(int i=0; i<col; i++) {
         int m = 0;
-        for(int j=0; j<2; j++) {
-            char buff[16];
-            sprintf(buff, "%.4f", M.data[j][i]);
+        for(int j=0; j<row; j++) {
+            char buff[12];
+            if(fabs(data[j*col + i]) < 10000.0000f)
+                sprintf(buff, "%.4f", data[j*col + i]);
+            else
+                sprintf(buff, "%.3e", data[j*col + i]);
             int c = strlen(buff);
             if(c > m)
                 m = c;
@@ -42,7 +56,7 @@ void rkMat3Print(rkMat3 M) {
     endline[line_width-1] = '\0';
     fputws(endline, stdout);
     
-    for(int i=0; i<2; i++) {
+    for(int i=0; i<row; i++) {
         wchar_t line[line_width];
         wmemset(line, ' ', line_width);
         wchar_t *p = line+2;
@@ -52,15 +66,18 @@ void rkMat3Print(rkMat3 M) {
         line[line_width-2] = '\n';
         line[line_width-1] = '\0';
         
-        for(int j=0; j<3; j++) {
-            wchar_t buff[16];
-            swprintf(buff, 16, L"%.4f", M.data[i][j]);
+        for(int j=0; j<col; j++) {
+            wchar_t buff[12];
+            if(fabs(data[i*col + j]) < 10000.0000f)
+                swprintf(buff, sizeof(buff), L"%.4f", data[i*col + j]);
+            else
+                swprintf(buff, sizeof(buff), L"%.3e", data[i*col + j]);
             int b = wcslen(buff);
             p += a[j]-b;
             wmemcpy(p, buff, b);
             p += b;
             
-            if(j == 2)
+            if(j == col-1)
                 break;
             *p = ',';
             p += 2;
@@ -71,7 +88,7 @@ void rkMat3Print(rkMat3 M) {
     endline[line_width-3] = L'┘';
     fputws(endline, stdout);
     
-    freopen(0, "w", stdout);
+    freopen(0, "a", stdout);
     setlocale(LC_ALL, loc);
 }
 

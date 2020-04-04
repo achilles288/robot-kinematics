@@ -174,7 +174,7 @@ rkEuler rkMat4GetRotation(rkMat4 M);
  * └─                        ─┘
  * @endcode
  */
-void rkMat3Print(rkMat3 M);
+#define rkMat3Print(M) rkMatPrint(&(M), RK_MAT3)
 
 /**
  * @brief Prints all the cells of the matrix on the console
@@ -191,7 +191,13 @@ void rkMat3Print(rkMat3 M);
  * └─                                   ─┘
  * @endcode
  */
-void rkMat4Print(rkMat4 M);
+#define rkMat4Print(M) rkMatPrint(&(M), RK_MAT4)
+
+
+#define RK_MAT3 0
+#define RK_MAT4 1
+
+void rkMatPrint(void *ptr, int type);
 
 
 #if defined __cplusplus
