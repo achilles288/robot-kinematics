@@ -19,16 +19,15 @@ rkEuler rkMat4GetRotation(rkMat4 M) {
         roll = atan2(M.data[2][1]/c2, M.data[2][2]/c2);
         yaw = atan2(M.data[1][0]/c2, M.data[0][0]/c2);
     }
+    // Gimbal lock position
     else {
-        // Gimbal lock position
         if(pitch > 0) { // pitch = pi/2
-            yaw = atan2(M.data[0][1], M.data[0][2]);
-            roll = 0;
+            yaw = atan2(-M.data[0][1], M.data[0][2]);
         }
         else { // pitch = -pi/2
-            yaw = atan2(M.data[0][1], -M.data[0][2]);
-            roll = 0;
+            yaw = atan2(-M.data[0][1], -M.data[0][2]);
         }
+        roll = 0;
     }
     return (rkEuler) {roll, pitch, yaw};
 }
