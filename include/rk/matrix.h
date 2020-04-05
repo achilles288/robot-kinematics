@@ -174,7 +174,9 @@ rkEuler rkMat4GetRotation(rkMat4 M);
  * └─                        ─┘
  * @endcode
  */
-#define rkMat3Print(M) rkMatPrint(&(M), RK_MAT3)
+#define rkMat3Print(M) ({ \
+    rkMat3 *__p = &(M); \
+    rkMatPrint(__p, RK_MAT3); })
 
 /**
  * @brief Prints all the cells of the matrix on the console
@@ -191,7 +193,9 @@ rkEuler rkMat4GetRotation(rkMat4 M);
  * └─                                   ─┘
  * @endcode
  */
-#define rkMat4Print(M) rkMatPrint(&(M), RK_MAT4)
+#define rkMat4Print(M)  ({ \
+    rkMat4 *__p = &(M); \
+    rkMatPrint(__p, RK_MAT4); })
 
 
 #define RK_MAT3 0
