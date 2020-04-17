@@ -30,13 +30,18 @@ static void assert_wstring_eq(wstring expected, wstring actual) {
     }
 }
 
-#define ASSERT_PRINT(X, FUNC) \
+
+#define ASSERT_PRINT(X, FUNC) ({ \
     testing::internal::CaptureStdout(); \
-    ASSERT_EXIT(((FUNC),exit(0)), \
+    EXPECT_EXIT(((FUNC), exit(0)), \
                 ::testing::ExitedWithCode(0),".*"); \
     string str = testing::internal::GetCapturedStdout(); \
     wstring out = wstring_convert<codecvt_utf8<wchar_t>>().from_bytes(str); \
-    assert_wstring_eq(out, (X))
+    if(::testing::Test::HasFailure()) \
+        cout << str; \
+    else \
+        assert_wstring_eq((X), out); \
+});
 
 
 TEST(MatPrintTest, mat3) {
