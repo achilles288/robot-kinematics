@@ -1,24 +1,12 @@
-# Robot Kinematics
+![Robot Kinematics Logo](./docs/logo-home.png)
 
 The main goal of this repository is mathematical calculations of forward and inverse kinematics. This is intended to be used for moving the end effector to a desired coordinate in 2D or 3D space. 
 
 <p align="center"><img src="./docs/robot-arm-kinematic1.png" alt="Robot arm kinematic geometry"></img></p>
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-### Install
-
-```makefile
-clone https://github.com/khantkyawkhaung/robot-kinematics
-cd robot-kinematics
-make SHARED=0
-```
-
 ## Documentation
 
-Please read the detailed documentation at [Wiki](https://github.com/khantkyawkhaung/robot-kinematics/wiki).
+You can read the detailed documentation at [Wiki](https://github.com/khantkyawkhaung/robot-kinematics/wiki).
 
 ## Contributing
 
