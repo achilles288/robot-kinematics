@@ -1,24 +1,3 @@
-/****************************************************************************
- * Copyright (C) 2020 by Khant Kyaw Khaung                                  *
- *                                                                          *
- * This file is part of Robot Kinematics.                                   *
- *                                                                          *
- *   Robot Kinematics is free software: you can redistribute it and/or      *
- *   modify it under the terms of the GNU General Public License as         *
- *   published by the Free Software Foundation, either version 3 of the     *
- *   License, or (at your option) any later version.                        *
- *                                                                          *
- *   Robot Kinematics is distributed in the hope that it will be useful,    *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of         *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the           *
- *   GNU General Public License for more details.                           *
- *                                                                          *
- *   You should have received a copy of the GNU General Public License      *
- *   along with Robot Kinematics. If not, see                               *
- *   <http://www.gnu.org/licenses/>.                                        *
- ****************************************************************************/
-
-
 /**
  * @file matrix.h
  * @brief The header declaring 3x3 and 4x4 matrix structures and functions
@@ -28,6 +7,10 @@
  * The row is not used in computation for better performance. 
  * These matrix structures and functions are only for rotation and translation 
  * applications.
+ * 
+ * @copyright Copyright (c) 2020 Khant Kyaw Khaung
+ * 
+ * @license{This project is released under the MIT License.}
  */
 
 
@@ -53,7 +36,7 @@ typedef struct _rkMat4 rkMat4;
  * Use them for rotation and translation applications.
  */
 struct _rkMat3 {
-    float data[2][3];
+    float data[2][3]; /**< Matrix cells */
 };
 
 /**
@@ -64,7 +47,7 @@ struct _rkMat3 {
  * Use them for rotation and translation applications.
  */
 struct _rkMat4 {
-    float data[3][4];
+    float data[3][4]; /**< Matrix cells */
 };
 
 

@@ -106,10 +106,12 @@ Macros</h2></td></tr>
 <tr class="memdesc:a8074f9c93d4b88242bb634d958cfea36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes 3D link positions from joint variables.  <a href="#a8074f9c93d4b88242bb634d958cfea36">More...</a><br /></td></tr>
 <tr class="separator:a8074f9c93d4b88242bb634d958cfea36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48930e14345bd131fe636b46b00e3b65"><td class="memItemLeft" align="right" valign="top"><a id="a48930e14345bd131fe636b46b00e3b65"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RK_2D_ORIENTATION_ANY</b>&#160;&#160;&#160;NAN</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kinematics_8h.html#a48930e14345bd131fe636b46b00e3b65">RK_2D_ORIENTATION_ANY</a>&#160;&#160;&#160;NAN</td></tr>
+<tr class="memdesc:a48930e14345bd131fe636b46b00e3b65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes 2D inverse kinematics function ignore end effector orientation. <br /></td></tr>
 <tr class="separator:a48930e14345bd131fe636b46b00e3b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6eb42bb3adb04be6f5f541f2fc7218fd"><td class="memItemLeft" align="right" valign="top"><a id="a6eb42bb3adb04be6f5f541f2fc7218fd"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RK_3D_ORIENTATION_ANY</b>&#160;&#160;&#160;((<a class="el" href="struct__rkVec3.html">rkEuler</a>) {NAN, NAN, NAN})</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kinematics_8h.html#a6eb42bb3adb04be6f5f541f2fc7218fd">RK_3D_ORIENTATION_ANY</a>&#160;&#160;&#160;((<a class="el" href="struct__rkVec3.html">rkEuler</a>) {NAN, NAN, NAN})</td></tr>
+<tr class="memdesc:a6eb42bb3adb04be6f5f541f2fc7218fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes 3D inverse kinematics function ignore end effector orientation. <br /></td></tr>
 <tr class="separator:a6eb42bb3adb04be6f5f541f2fc7218fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -150,7 +152,12 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>All the functions you need for kinematics of a robot arm. </p>
-<p>They compute transformations of kinematic chain with rotary joints. The main applications are for robot arms, quadruped robots and humanoid robots. Using forward kinematics, the output of a mechanism obtained from joint variables can be computed and visualized (both translation and rotation). For inverse kinematics is used for obtaining joint variables for a specific coordinate of an end-effector. </p>
+<p>They compute transformations of kinematic chain with rotary joints. The main applications are for robot arms, quadruped robots and humanoid robots. Using forward kinematics, the output of a mechanism obtained from joint variables can be computed and visualized (both translation and rotation). For inverse kinematics is used for obtaining joint variables for a specific coordinate of an end-effector.</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2020 Khant Kyaw Khaung</dd></dl>
+<dl class="section copyright">
+<dt>License</dt>
+<dd>This project is released under the MIT License. </dd>
+</dl>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a1c34081ed634de96b4698d6e8cb8328b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1c34081ed634de96b4698d6e8cb8328b">&#9670;&nbsp;</a></span>rkDestroyChain2D</h2>

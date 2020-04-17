@@ -100,10 +100,10 @@ Macros</h2></td></tr>
 <tr class="memitem:a505ba639628b07fe7d76c81512bd8b3d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a505ba639628b07fe7d76c81512bd8b3d">rkMat4GetTranslation</a>(M)&#160;&#160;&#160;((<a class="el" href="struct__rkVec3.html">rkVec3</a>) {(M).data[0][3], (M).data[1][3], (M).data[2][3]})</td></tr>
 <tr class="memdesc:a505ba639628b07fe7d76c81512bd8b3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the position vector from the matrix.  <a href="#a505ba639628b07fe7d76c81512bd8b3d">More...</a><br /></td></tr>
 <tr class="separator:a505ba639628b07fe7d76c81512bd8b3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7252555aa123d999b3e8f3a93cf80020"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a7252555aa123d999b3e8f3a93cf80020">rkMat3Print</a>(M)&#160;&#160;&#160;rkMatPrint(&amp;(M), RK_MAT3)</td></tr>
+<tr class="memitem:a7252555aa123d999b3e8f3a93cf80020"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a7252555aa123d999b3e8f3a93cf80020">rkMat3Print</a>(M)</td></tr>
 <tr class="memdesc:a7252555aa123d999b3e8f3a93cf80020"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints all the cells of the matrix on the console.  <a href="#a7252555aa123d999b3e8f3a93cf80020">More...</a><br /></td></tr>
 <tr class="separator:a7252555aa123d999b3e8f3a93cf80020"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ce9a386ed0ee9e85b824c7390ddaaa8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a8ce9a386ed0ee9e85b824c7390ddaaa8">rkMat4Print</a>(M)&#160;&#160;&#160;rkMatPrint(&amp;(M), RK_MAT4)</td></tr>
+<tr class="memitem:a8ce9a386ed0ee9e85b824c7390ddaaa8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="matrix_8h.html#a8ce9a386ed0ee9e85b824c7390ddaaa8">rkMat4Print</a>(M)</td></tr>
 <tr class="memdesc:a8ce9a386ed0ee9e85b824c7390ddaaa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints all the cells of the matrix on the console.  <a href="#a8ce9a386ed0ee9e85b824c7390ddaaa8">More...</a><br /></td></tr>
 <tr class="separator:a8ce9a386ed0ee9e85b824c7390ddaaa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0bbf9c2d95be51f408c670b2fb8d68d"><td class="memItemLeft" align="right" valign="top"><a id="af0bbf9c2d95be51f408c670b2fb8d68d"></a>
@@ -145,7 +145,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>rkMatPrint</b> (void 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The header declaring 3x3 and 4x4 matrix structures and functions. </p>
-<p>3x3 and 4x4 matrices. However, they have an exceptional having one row removed. The third block is always 0s and the fourth part a 1. The row is not used in computation for better performance. These matrix structures and functions are only for rotation and translation applications. </p>
+<p>3x3 and 4x4 matrices. However, they have an exceptional having one row removed. The third block is always 0s and the fourth part a 1. The row is not used in computation for better performance. These matrix structures and functions are only for rotation and translation applications.</p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2020 Khant Kyaw Khaung</dd></dl>
+<dl class="section copyright">
+<dt>License</dt>
+<dd>This project is released under the MIT License. </dd>
+</dl>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a7741c1d070783d2ace3f1997545c837c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7741c1d070783d2ace3f1997545c837c">&#9670;&nbsp;</a></span>rkMat3GetRotation</h2>
@@ -212,11 +217,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>rkMatPrint</b> (void 
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">M</td><td>)</td>
-          <td>&#160;&#160;&#160;rkMatPrint(&amp;(M), RK_MAT3)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">({ \</div><div class="line">    rkMat3 *__p = &amp;(M); \</div><div class="line">    rkMatPrint(__p, RK_MAT3); })</div></div><!-- fragment -->
 <p>Prints all the cells of the matrix on the console. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -266,11 +271,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>rkMatPrint</b> (void 
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">M</td><td>)</td>
-          <td>&#160;&#160;&#160;rkMatPrint(&amp;(M), RK_MAT4)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">({ \</div><div class="line">    rkMat4 *__p = &amp;(M); \</div><div class="line">    rkMatPrint(__p, RK_MAT4); })</div></div><!-- fragment -->
 <p>Prints all the cells of the matrix on the console. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

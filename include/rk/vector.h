@@ -1,29 +1,12 @@
-/****************************************************************************
- * Copyright (C) 2020 by Khant Kyaw Khaung                                  *
- *                                                                          *
- * This file is part of Robot Kinematics.                                   *
- *                                                                          *
- *   Robot Kinematics is free software: you can redistribute it and/or      *
- *   modify it under the terms of the GNU General Public License as         *
- *   published by the Free Software Foundation, either version 3 of the     *
- *   License, or (at your option) any later version.                        *
- *                                                                          *
- *   Robot Kinematics is distributed in the hope that it will be useful,    *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of         *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the           *
- *   GNU General Public License for more details.                           *
- *                                                                          *
- *   You should have received a copy of the GNU General Public License      *
- *   along with Robot Kinematics. If not, see                               *
- *   <http://www.gnu.org/licenses/>.                                        *
- ****************************************************************************/
-
-
 /**
  * @file vector.h
  * @brief 2D and 3D vector structures and functions
  *
  * Vecotr dot product, cross product and normalization functions.
+ * 
+ * @copyright Copyright (c) 2020 Khant Kyaw Khaung
+ * 
+ * @license{This project is released under the MIT License.}
  */
 
 
@@ -109,7 +92,7 @@ rkVec3 rkVec3Normalize(rkVec3 v);
  * @brief 3D vector dot product operation.
  *
  * @param a Vector a
- * @param a Vector b
+ * @param b Vector b
  * @return Dot product
  */
 float rkVec3Dot(rkVec3 a, rkVec3 b);

@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['rk_5f2d_5forientation_5fany',['RK_2D_ORIENTATION_ANY',['../kinematics_8h.html#a48930e14345bd131fe636b46b00e3b65',1,'kinematics.h']]],
+  ['rk_5f3d_5forientation_5fany',['RK_3D_ORIENTATION_ANY',['../kinematics_8h.html#a6eb42bb3adb04be6f5f541f2fc7218fd',1,'kinematics.h']]],
   ['rkdestroychain2d',['rkDestroyChain2D',['../kinematics_8h.html#a1c34081ed634de96b4698d6e8cb8328b',1,'kinematics.h']]],
   ['rkdestroychain3d',['rkDestroyChain3D',['../kinematics_8h.html#a074050e6ac6bea6e3a0d4df75e566cb6',1,'kinematics.h']]],
   ['rkforwardkinematics2d',['rkForwardKinematics2D',['../kinematics_8h.html#a2e9866a082c7606f376167f13317534e',1,'kinematics.h']]],

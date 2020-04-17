@@ -1,24 +1,3 @@
-/****************************************************************************
- * Copyright (C) 2020 by Khant Kyaw Khaung                                  *
- *                                                                          *
- * This file is part of Robot Kinematics.                                   *
- *                                                                          *
- *   Robot Kinematics is free software: you can redistribute it and/or      *
- *   modify it under the terms of the GNU General Public License as         *
- *   published by the Free Software Foundation, either version 3 of the     *
- *   License, or (at your option) any later version.                        *
- *                                                                          *
- *   Robot Kinematics is distributed in the hope that it will be useful,    *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of         *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the           *
- *   GNU General Public License for more details.                           *
- *                                                                          *
- *   You should have received a copy of the GNU General Public License      *
- *   along with Robot Kinematics. If not, see                               *
- *   <http://www.gnu.org/licenses/>.                                        *
- ****************************************************************************/
-
-
 /**
  * @file kinematics.h
  * @brief All the functions you need for kinematics of a robot arm
@@ -29,6 +8,10 @@
  * joint variables can be computed and visualized (both translation and 
  * rotation). For inverse kinematics is used for obtaining joint variables for 
  * a specific coordinate of an end-effector.
+ * 
+ * @copyright Copyright (c) 2020 Khant Kyaw Khaung
+ * 
+ * @license{This project is released under the MIT License.}
  */
 
 
@@ -356,7 +339,14 @@ void rkInverseKinematics3D(rkLink3D *root, rkLink3D *end,
 
 
 
+/**
+ * @brief Makes 2D inverse kinematics function ignore end effector orientation.
+ */
 #define RK_2D_ORIENTATION_ANY NAN
+
+/**
+ * @brief Makes 3D inverse kinematics function ignore end effector orientation.
+ */
 #define RK_3D_ORIENTATION_ANY ((rkEuler) {NAN, NAN, NAN})
 
 
