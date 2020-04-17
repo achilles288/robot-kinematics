@@ -14,4 +14,4 @@ If you are willing to help us enhancing this open source project, you may summit
 
 ## License
 
-This project is licensed under the **GPL-v3** License - see the [LICENSE](https://github.com/khantkyawkhaung/robot-kinematics/blob/master/LICENSE) file for details.
+This project is licensed under the **MIT** License - see the [LICENSE](https://github.com/khantkyawkhaung/robot-kinematics/blob/master/LICENSE) file for details.
